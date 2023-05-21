@@ -1,0 +1,4 @@
+name: avmeister
+version: '${version}'
+main: org.bluk.avmeister.Avmeister
+api-version: 1.19
