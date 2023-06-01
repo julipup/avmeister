@@ -1,0 +1,13 @@
+parts:
+  - id: bluzka
+    type: body
+    variations:
+      - file: parts/clothes/bluzka_alex.png
+        bodyType: slim
+  - id: vest
+    type: body
+    variations:
+      - file: parts/clothes/vest_alex.png
+        bodyType: slim
+      - file: parts/clothes/vest_steve.png
+        bodyType: normal

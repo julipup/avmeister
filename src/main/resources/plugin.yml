@@ -1,4 +1,5 @@
 name: avmeister
 version: '${version}'
 main: org.bluk.avmeister.Avmeister
-api-version: 1.19
+api-version: 1.16
+depend: [ "SkinsRestorer" ]
