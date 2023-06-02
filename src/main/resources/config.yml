@@ -1,11 +1,13 @@
+_populateWithExampleData: true
+
 parts:
   - id: bluzka
-    type: body
+    location: body
     variations:
       - file: parts/clothes/bluzka_alex.png
         bodyType: slim
   - id: vest
-    type: body
+    location: body
     variations:
       - file: parts/clothes/vest_alex.png
         bodyType: slim

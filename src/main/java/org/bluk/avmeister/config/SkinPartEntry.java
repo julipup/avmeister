@@ -1,42 +1,36 @@
 package org.bluk.avmeister.config;
 
-import org.apache.commons.lang.StringUtils;
-import org.bluk.avmeister.Avmeister;
-import org.bluk.avmeister.bootstrappers.SkinPartsBootstrapper;
-import org.bluk.avmeister.config.skinpartentry.PartType;
 import org.bluk.avmeister.config.skinpartentry.VariationEntry;
+import org.bluk.avmeister.skins.parts.PartLocation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 public class SkinPartEntry {
     public String id;
-    public PartType type;
+    public PartLocation location;
     public List<VariationEntry> variations;
 
-    public SkinPartEntry(String id, PartType type, List<VariationEntry> variations) {
+    public SkinPartEntry(String id, PartLocation location, List<VariationEntry> variations) {
         this.id = id;
-        this.type = type;
+        this.location = location;
         this.variations = variations;
     }
-
-    ;
 
     public static class Parser {
         public static SkinPartEntry parse(Map<?, ?> values) {
             // Validating that all fields exist
             // @todo remove this shitty looking hardcode?
             if (!values.containsKey("id") ||
-                    !values.containsKey("type") ||
+                    !values.containsKey("location") ||
                     !values.containsKey("variations")
                 // @todo throw normal error class and message
             ) throw new RuntimeException("Invalid configuration");
 
             // Parsing
             String id = (String) values.get("id");
-            PartType type = PartType.fromString((String) values.get("type"));
+            PartLocation location = PartLocation.fromString((String) values.get("location"));
 
             // Parsing variations
             var rawVariations = (List<Map<?, ?>>) values.get("variations");
@@ -48,7 +42,7 @@ public class SkinPartEntry {
             });
 
             // Creating new SkinPart instance
-            return new SkinPartEntry(id, type, variations);
+            return new SkinPartEntry(id, location, variations);
         }
     }
 }

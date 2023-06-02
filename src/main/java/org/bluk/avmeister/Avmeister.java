@@ -24,11 +24,18 @@ public final class Avmeister extends JavaPlugin {
 
         // Bootstrapping our plugin
         // - Order is important!
-        EventsBootstrapper.bootstrap();
-        CommandsBootstrapper.bootstrap();
-        ConfigBootstrapper.bootstrap();
-        SkinPartsBootstrapper.bootstrap();
-        SkinsBootstrapper.bootstrap();
+        try {
+            EventsBootstrapper.bootstrap();
+            CommandsBootstrapper.bootstrap();
+            ConfigBootstrapper.bootstrap();
+            ExampleDataBootstrapper.bootstrap();
+            SkinPartsBootstrapper.bootstrap();
+            SkinsBootstrapper.bootstrap();
+        } catch (Throwable e) {
+            // @todo normal errors
+            e.printStackTrace();
+        }
+        ;
     }
 
     @Override

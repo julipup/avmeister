@@ -1,6 +1,9 @@
 package org.bluk.avmeister.skins;
 
 import lombok.Getter;
+import org.bluk.avmeister.skins.generator.SkinGenerator;
+import org.bluk.avmeister.skins.generator.queue.GeneratorQueue;
+import org.bluk.avmeister.skins.generator.queue.GeneratorTask;
 import org.bluk.avmeister.skins.parts.SkinPart;
 
 import java.util.ArrayList;
@@ -8,14 +11,25 @@ import java.util.List;
 
 public class SkinsStorage {
     @Getter
-    private static List<CompleteSkin> entries = new ArrayList<>();
+    private static final List<CompleteSkin> entries = new ArrayList<>();
 
-    static {
-        // testing
-        entries.add(new CompleteSkin.Builder()
-                .addBodyPart(new SkinPart.Builder()
-                        .setTexture("")
-                        .build())
-                .build());
+    public static void initializeFromParts(SkinPart head, SkinPart body, SkinPart legs) {
+        // Creating new instance of CompleteSkin, adding it to our storage
+        // and calling postAddHook() on it
+        var skin = new CompleteSkin(head, body, legs);
+
+        entries.add(skin);
+        SkinsStorage.postAddHook(skin);
+    }
+
+    public static void addToStorage(CompleteSkin skin) {
+        // Adding this skin and calling postAddHook on it
+        entries.add(skin);
+        SkinsStorage.postAddHook(skin);
+    }
+
+    private static void postAddHook(CompleteSkin skin) {
+        // @todo Checking if we have this skin stored in SkinsRestorer cache (name is skin.hash)
+        SkinGenerator.getQueue().add(new GeneratorTask(skin));
     }
 }

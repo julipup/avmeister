@@ -1,16 +1,23 @@
 package org.bluk.avmeister.skins;
 
+import lombok.Getter;
 import org.bluk.avmeister.skins.parts.SkinPart;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CompleteSkin {
-    public final List<SkinPart> head;
-    public final List<SkinPart> body;
-    public final List<SkinPart> legs;
+    public final SkinPart head;
+    public final SkinPart body;
+    public final SkinPart legs;
 
-    public CompleteSkin(List<SkinPart> head, List<SkinPart> body, List<SkinPart> legs) {
+    // @todo implement hash generator, isGenerated logic
+    public final String hash = "0";
+
+    @Getter
+    private boolean isGenerated = false;
+
+    public CompleteSkin(SkinPart head, SkinPart body, SkinPart legs) {
         this.head = head;
         this.body = body;
         this.legs = legs;
@@ -19,22 +26,22 @@ public class CompleteSkin {
     //
     // Builder
     public static class Builder {
-        private final List<SkinPart> head = new ArrayList<>();
-        private final List<SkinPart> body = new ArrayList<>();
-        private final List<SkinPart> legs = new ArrayList<>();
+        private SkinPart head;
+        private SkinPart body;
+        private SkinPart legs;
 
-        public Builder addHeadPart(SkinPart part) {
-            this.head.add(part);
+        public Builder setHeadPart(SkinPart part) {
+            this.head = part;
             return this;
         }
 
-        public Builder addBodyPart(SkinPart part) {
-            this.body.add(part);
+        public Builder setBodyPart(SkinPart part) {
+            this.body = part;
             return this;
         }
 
-        public Builder addLegsPart(SkinPart part) {
-            this.legs.add(part);
+        public Builder setLegsPart(SkinPart part) {
+            this.legs = part;
             return this;
         }
 

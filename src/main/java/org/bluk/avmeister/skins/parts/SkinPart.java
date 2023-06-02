@@ -9,13 +9,15 @@ public class SkinPart {
     public final int y;
     public final String texturePath;
     public final BodyType bodyType;
+    public final PartLocation partLocation;
 
-    public SkinPart(String id, int x, int y, String texturePath, BodyType bodyType) {
+    public SkinPart(String id, int x, int y, String texturePath, BodyType bodyType, PartLocation partLocation) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.texturePath = texturePath;
         this.bodyType = bodyType;
+        this.partLocation = partLocation;
     }
 
     //
@@ -26,6 +28,7 @@ public class SkinPart {
         private int y = 0;
         private String texturePath;
         private BodyType bodyType = BodyType.NORMAL;
+        private PartLocation partLocation;
 
         public Builder setId(String id) {
             this.id = id;
@@ -47,8 +50,13 @@ public class SkinPart {
             return this;
         }
 
-        public Builder setBodyType(BodyType type) {
+        public Builder withBodyType(BodyType type) {
             this.bodyType = type;
+            return this;
+        }
+
+        public Builder setPartLocation(PartLocation location) {
+            this.partLocation = location;
             return this;
         }
 
@@ -56,8 +64,9 @@ public class SkinPart {
             // @todo throw normal errors
             if (this.texturePath == null) throw new RuntimeException("No texturePath provided");
             if (this.id == null) throw new RuntimeException("No id provided");
+            if (this.partLocation == null) throw new RuntimeException("No partLocation provided");
 
-            return new SkinPart(id, x, y, texturePath, bodyType);
+            return new SkinPart(id, x, y, texturePath, bodyType, partLocation);
         }
     }
 }
