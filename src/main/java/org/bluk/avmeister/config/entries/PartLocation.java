@@ -1,4 +1,4 @@
-package org.bluk.avmeister.skins.parts;
+package org.bluk.avmeister.config.entries;
 
 public enum PartLocation {
     BODY,
@@ -11,14 +11,14 @@ public enum PartLocation {
                 return PartLocation.BODY;
             }
             case "HEAD" -> {
-                return PartLocation.HEAD;
+                return HEAD;
             }
             case "LEGS" -> {
-                return PartLocation.LEGS;
+                return LEGS;
             }
         }
 
         // @todo throw normal error message
-        throw new RuntimeException("invalid partType");
+        throw new RuntimeException("invalid partLocation");
     }
 }

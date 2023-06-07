@@ -13,10 +13,10 @@ public class SkinsStorage {
     @Getter
     private static final List<CompleteSkin> entries = new ArrayList<>();
 
-    public static void initializeFromParts(SkinPart head, SkinPart body, SkinPart legs) {
+    public static void initializeFromParts(List<SkinPart> parts) {
         // Creating new instance of CompleteSkin, adding it to our storage
         // and calling postAddHook() on it
-        var skin = new CompleteSkin(head, body, legs);
+        var skin = new CompleteSkin(parts);
 
         entries.add(skin);
         SkinsStorage.postAddHook(skin);

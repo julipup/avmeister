@@ -1,7 +1,7 @@
 package org.bluk.avmeister.bootstrappers;
 
 import org.bluk.avmeister.Avmeister;
-import org.bluk.avmeister.config.SkinPartEntry;
+import org.bluk.avmeister.config.entries.SkinPartEntry;
 import org.bluk.avmeister.skins.PartsStorage;
 import org.bukkit.configuration.file.FileConfiguration;
 

@@ -2,8 +2,10 @@ package org.bluk.avmeister;
 
 import com.jonahseguin.drink.CommandService;
 import com.jonahseguin.drink.Drink;
+import okhttp3.Cache;
 import org.bluk.avmeister.bootstrappers.*;
-import org.bukkit.command.CommandSender;
+import org.bluk.avmeister.skins.CompleteSkin;
+import org.bluk.avmeister.skins.parts.SkinPart;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.reflections.Reflections;
 import net.skinsrestorer.api.SkinsRestorerAPI;
@@ -30,16 +32,18 @@ public final class Avmeister extends JavaPlugin {
             ConfigBootstrapper.bootstrap();
             ExampleDataBootstrapper.bootstrap();
             SkinPartsBootstrapper.bootstrap();
-            SkinsBootstrapper.bootstrap();
+            GeneratorQueueBootstrapper.bootstrap();
+            CacheBootstrapper.bootstrap();
         } catch (Throwable e) {
             // @todo normal errors
             e.printStackTrace();
         }
-        ;
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        GeneratorQueueBootstrapper.shutdown();
+
+        // @todo add other things here
     }
 }

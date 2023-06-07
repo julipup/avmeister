@@ -1,7 +1,6 @@
-package org.bluk.avmeister.config;
+package org.bluk.avmeister.config.entries;
 
-import org.bluk.avmeister.config.skinpartentry.VariationEntry;
-import org.bluk.avmeister.skins.parts.PartLocation;
+import org.bluk.avmeister.config.entries.skinpartentry.VariationEntry;
 
 import java.util.ArrayList;
 import java.util.List;

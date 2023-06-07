@@ -1,5 +1,6 @@
 _populateWithExampleData: true
 
+# | Skin parts configuration
 parts:
   - id: bluzka
     location: body
@@ -13,3 +14,9 @@ parts:
         bodyType: slim
       - file: parts/clothes/vest_steve.png
         bodyType: normal
+  - id: legs
+    location: legs
+    variations:
+      - file: parts/clothes/vest_alex.png
+        x: 100
+        y: 200
