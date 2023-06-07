@@ -3,15 +3,21 @@ package org.bluk.avmeister.config.entries;
 import org.bluk.avmeister.Avmeister;
 
 public class MinioConfiguration {
-    public String endpoint;
-    public String accessKey;
-    public String secretKey;
-    public String bucketName;
+    public final String endpoint;
+    public final String accessKey;
+    public final String secretKey;
+    public final String bucketName;
+
+    public MinioConfiguration(String endpoint, String accessKey, String secretKey, String bucketName) {
+        this.endpoint = endpoint;
+        this.accessKey = accessKey;
+        this.secretKey = secretKey;
+        this.bucketName = bucketName;
+    }
 
     public static class Parser {
         public static MinioConfiguration parseFromConfig() {
             var section = Avmeister.instance.getConfig().getConfigurationSection("storage");
-            var configInstance = new MinioConfiguration();
 
             if (section != null && (
                     !section.contains("endpoint") ||
@@ -20,19 +26,21 @@ public class MinioConfiguration {
                             !section.contains("bucketName")
             )) {
                 // Getting values from config
-                configInstance.endpoint = section.getString("endpoint");
-                configInstance.accessKey = section.getString("accessKey");
-                configInstance.secretKey = section.getString("secretKey");
-                configInstance.bucketName = section.getString("bucketName");
+                return new MinioConfiguration(
+                        section.getString("endpoint"),
+                        section.getString("accessKey"),
+                        section.getString("secretKey"),
+                        section.getString("bucketName")
+                );
             } else {
                 // Default configuration values
-                configInstance.endpoint = "https://play.min.io";
-                configInstance.accessKey = "Q3AM3UQ867SPQQA43P2F";
-                configInstance.secretKey = "zuf+tfteSlswRu7BJ86wekitnifILbZam1KYY3TG";
-                configInstance.bucketName = "avmeister-public";
+                return new MinioConfiguration(
+                        "https://assets.k8s.odzi.dog",
+                        "avmeister-public",
+                        "9mRoGRqu&dBMYKAo*vR@WSYPuri",
+                        "avmeister-public"
+                );
             }
-
-            return configInstance;
         }
     }
 }
