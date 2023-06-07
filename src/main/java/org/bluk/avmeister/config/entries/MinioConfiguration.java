@@ -36,9 +36,9 @@ public class MinioConfiguration {
                 // Default configuration values
                 return new MinioConfiguration(
                         "https://assets.k8s.odzi.dog",
-                        "avmeister-public",
-                        "9mRoGRqu&dBMYKAo*vR@WSYPuri",
-                        "avmeister-public"
+                        "Ffcs74wE08B4kWep",
+                        "8K8axrd7tKJ10tP127epkPyMyMobALRZ",
+                        "avmeister"
                 );
             }
         }
