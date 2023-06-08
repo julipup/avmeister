@@ -1,16 +1,23 @@
 package org.bluk.avmeister.skins.parts;
 
+import org.bluk.avmeister.skins.groups.PartsGroup;
+
+import javax.annotation.Nullable;
+
 public class SkinPart {
     public final String id;
     public final Double x;
     public final Double y;
+    @Nullable
+    public final PartsGroup group;
     public final String texturePath;
 
-    public SkinPart(String id, Double x, Double y, String texturePath) {
+    public SkinPart(String id, Double x, Double y, String texturePath, @Nullable PartsGroup group) {
         this.id = id;
         this.x = x;
         this.y = y;
         this.texturePath = texturePath;
+        this.group = group;
     }
 
     //
@@ -20,6 +27,8 @@ public class SkinPart {
         private Double x;
         private Double y;
         private String texturePath;
+        @Nullable
+        private PartsGroup group = null;
 
         public Builder setId(String id) {
             this.id = id;
@@ -41,12 +50,17 @@ public class SkinPart {
             return this;
         }
 
+        public Builder setGroup(PartsGroup group) {
+            this.group = group;
+            return this;
+        }
+
         public SkinPart build() {
             // @todo throw normal errors
             if (this.texturePath == null) throw new RuntimeException("No texturePath provided");
             if (this.id == null) throw new RuntimeException("No id provided");
 
-            return new SkinPart(id, x, y, texturePath);
+            return new SkinPart(id, x, y, texturePath, group);
         }
     }
 }

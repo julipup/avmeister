@@ -31,6 +31,8 @@ public class PartsStorage {
                     .setId(entry.id)
                     .setTexture(variationEntry.file);
 
+            if (entry.group != null) partBuilder.setGroup(GroupsStorage.getById(entry.group));
+
             // Determining x and y coordinates
             // using skinEntry's partLocation and bodyType
             //                  or
@@ -44,7 +46,7 @@ public class PartsStorage {
                 if (variationEntry.bodyType == null || entry.location == null)
                     throw new RuntimeException(String.format("SkinPartVariationEntry with id %s and file %s could not be created: - no x && y coordinates provided; - no bodyType or partLocation provided", entry.id, variationEntry.file));
 
-
+                // @todo calculate
             }
 
             entries.add(partBuilder.build());

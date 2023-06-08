@@ -31,6 +31,7 @@ public final class Avmeister extends JavaPlugin {
             CommandsBootstrapper.bootstrap();
             ConfigBootstrapper.bootstrap();
             ExampleDataBootstrapper.bootstrap();
+            PartGroupsBootstrapper.bootstrap();
             SkinPartsBootstrapper.bootstrap();
             GeneratorQueueBootstrapper.bootstrap();
             CacheBootstrapper.bootstrap();
