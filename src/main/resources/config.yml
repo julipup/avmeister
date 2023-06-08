@@ -1,22 +1,50 @@
 _populateWithExampleData: true
 
+#
+# Docstrings explanation:
+# [] - optional properties
+# <> - mandatory properties
+# (val1|val2) - enum
+
 # | Skin parts configuration
+#
+# Format:
+# - id: <part id>
+#   location: <(body|legs|head)>
+#   group: [group id]
+#   variations:
+#     - file: <part .png file>
+#       bodyType: [(slim|normal)]
+#       x: [x coordinate]
+#       y: [y coordinate]
+#
 parts:
-  - id: bluzka
-    location: body
-    variations:
-      - file: parts/clothes/bluzka_alex.png
-        bodyType: slim
-  - id: vest
-    location: body
-    variations:
-      - file: parts/clothes/vest_alex.png
-        bodyType: slim
-      - file: parts/clothes/vest_steve.png
-        bodyType: normal
-  - id: legs
+  - id: jeans
     location: legs
+    group: legs-main
     variations:
       - file: parts/clothes/vest_alex.png
-        x: 100
-        y: 200
+  - id: shorts
+    location: legs
+    group: legs-main
+    variations:
+      - file: parts/clothes/vest_alex.png
+
+# | Per-group additional configuration
+#
+# Format:
+# - id: <group id>
+#   rules:
+#     - [system rule id] [{ optional configuration }]
+#
+# Example:
+# - id: headwear
+#   rules:
+#     - MaxParts { number: 4 }
+#
+# List of all rules:
+# @todo
+groups:
+  - id: legs-main
+    rules:
+      - "MaxParts { number: 1 }"
