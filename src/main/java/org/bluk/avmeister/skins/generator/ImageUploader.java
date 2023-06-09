@@ -30,6 +30,7 @@ public class ImageUploader {
         } catch (IOException exception) {
             throw exception;
         } catch (Throwable exception) {
+            exception.printStackTrace();
             throw new UploaderException(exception);
         }
     }

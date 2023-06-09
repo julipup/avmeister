@@ -32,9 +32,6 @@ public class ManagedPlayer {
         this.dataSaver = new DataSaver(this);
         this.skinUpdater = new SkinUpdater(this);
 
-        // @todo
-        // loading and applying skin data
-
         // Running AFTER_CREATE hook
         if (hooks.containsKey(HookType.AFTER_CREATE)) {
             hooks.get(HookType.AFTER_CREATE).forEach(callback -> callback.apply(this));

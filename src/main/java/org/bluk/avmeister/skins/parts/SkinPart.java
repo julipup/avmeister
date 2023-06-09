@@ -6,13 +6,13 @@ import javax.annotation.Nullable;
 
 public class SkinPart {
     public final String id;
-    public final Double x;
-    public final Double y;
+    public final Integer x;
+    public final Integer y;
     @Nullable
     public final PartsGroup group;
     public final String texturePath;
 
-    public SkinPart(String id, Double x, Double y, String texturePath, @Nullable PartsGroup group) {
+    public SkinPart(String id, int x, int y, String texturePath, @Nullable PartsGroup group) {
         this.id = id;
         this.x = x;
         this.y = y;
@@ -24,8 +24,8 @@ public class SkinPart {
     // Builder
     public static class Builder {
         private String id;
-        private Double x;
-        private Double y;
+        private Integer x;
+        private Integer y;
         private String texturePath;
         @Nullable
         private PartsGroup group = null;
@@ -35,12 +35,12 @@ public class SkinPart {
             return this;
         }
 
-        public Builder setX(Double x) {
+        public Builder setX(int x) {
             this.x = x;
             return this;
         }
 
-        public Builder setY(Double y) {
+        public Builder setY(int y) {
             this.y = y;
             return this;
         }

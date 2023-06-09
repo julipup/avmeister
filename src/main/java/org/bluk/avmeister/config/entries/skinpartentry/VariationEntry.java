@@ -8,8 +8,8 @@ public class VariationEntry {
     public String file;
     public BodyType bodyType;
 
-    public Double x;
-    public Double y;
+    public Integer x;
+    public Integer y;
 
     public VariationEntry(String file) {
         this(file, BodyType.NORMAL);
@@ -20,7 +20,7 @@ public class VariationEntry {
         this.bodyType = bodyType;
     }
 
-    public VariationEntry(String file, BodyType bodyType, Double x, Double y) {
+    public VariationEntry(String file, BodyType bodyType, int x, int y) {
         this.file = file;
         this.bodyType = bodyType;
         this.x = x;
@@ -43,8 +43,8 @@ public class VariationEntry {
             }
 
             if (values.containsKey("x") && values.containsKey("y")) {
-                Double x = Double.parseDouble(values.get("x").toString());
-                Double y = Double.parseDouble(values.get("y").toString());
+                int x = Integer.parseInt(values.get("x").toString());
+                int y = Integer.parseInt(values.get("y").toString());
 
                 return new VariationEntry(file, bodyType, x, y);
             } else {
