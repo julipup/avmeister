@@ -1,4 +1,4 @@
-_populateWithExampleData: true
+_populateWithExampleData: false
 
 #
 # Docstrings explanation:
@@ -19,16 +19,86 @@ _populateWithExampleData: true
 #       y: [y coordinate]
 #
 parts:
-  - id: jeans
-    location: legs
-    group: legs-main
+  # Eyes
+  - id: blue-eyes
+    location: head
+    group: eyes-main
     variations:
-      - file: parts/clothes/vest_alex.png
-  - id: shorts
-    location: legs
-    group: legs-main
+      - file: parts/eyes/blue.png
+
+  - id: brown-eyes
+    location: head
+    group: eyes-main
     variations:
-      - file: parts/clothes/vest_alex.png
+      - file: parts/eyes/brown.png
+
+  - id: gray-eyes
+    location: head
+    group: eyes-main
+    variations:
+      - file: parts/eyes/gray.png
+
+  - id: green-eyes
+    location: head
+    group: eyes-main
+    variations:
+      - file: parts/eyes/green.png
+
+  # Hair
+  - id: casual_blond
+    location: head
+    group: hair-main
+    variations:
+      - file: parts/hair/casual_blond_steve.png
+
+  - id: casual_brown
+    location: head
+    group: hair-main
+    variations:
+      - file: parts/hair/casual_brown_steve.png
+
+  - id: casual_red
+    location: head
+    group: hair-main
+    variations:
+      - file: parts/hair/casual_red_steve.png
+
+  - id: curtains_blond
+    location: head
+    group: hair-main
+    variations:
+      - file: parts/hair/curtains_blond_steve.png
+
+  - id: curtains_brown
+    location: head
+    group: hair-main
+    variations:
+      - file: parts/hair/curtains_brown.png
+
+  - id: curtains_red
+    location: head
+    group: hair-main
+    variations:
+      - file: parts/hair/curtains_red.png
+
+  # Clothes
+  - id: shirt
+    location: body
+    group: clothes-main
+    variations:
+      - file: parts/clothes/shirt_steve.png
+
+  - id: vest
+    location: body
+    group: clothes-main
+    variations:
+      - file: parts/clothes/vest_steve.png
+
+  - id: blouse
+    location: body
+    group: clothes-main
+    variations:
+      - file: parts/clothes/blouse_alex.png
 
 # | Per-group additional configuration
 #
@@ -45,6 +115,8 @@ parts:
 # List of all rules:
 # @todo
 groups:
-  - id: legs-main
+  - id: eyes-main
     rules:
       - "MaxParts { number: 1 }"
+  - id: hair-main
+  - id: clothes-main

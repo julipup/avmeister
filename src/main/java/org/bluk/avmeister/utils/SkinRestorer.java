@@ -29,13 +29,8 @@ public class SkinRestorer {
 
         if (Files.exists(Path.of(filePath))) {
             try {
-                var values = gson.fromJson(new FileReader(filePath), HashMap.class);
-
-                if (values.containsKey("parts") && values.containsKey("hash")) {
-                    Avmeister.instance.getLogger().info(String.format("Parts from file: %s", values));
-
-                    return SerializableSkin.deserialize(values);
-                }
+                var object = gson.fromJson(new FileReader(filePath), SerializableSkin.class);
+                return SerializableSkin.deserialize(object);
             } catch (Throwable e) {
                 // @todo normal error handling
                 e.printStackTrace();

@@ -38,7 +38,7 @@ public class TestCommand extends AbstractCommand {
                         .build();
 
                 Avmeister.instance.getLogger().info("Asking our generator to generate new skin...");
-                managedPlayer.getSkinUpdater().setSkin(skin);
+                managedPlayer.getSkinManager().setSkin(skin);
             } catch (Throwable e) {
                 e.printStackTrace();
             }

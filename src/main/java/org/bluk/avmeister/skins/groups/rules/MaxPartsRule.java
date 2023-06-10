@@ -12,7 +12,8 @@ public class MaxPartsRule extends AbstractGroupRule {
     private int maxParts = 1;
 
     @Override
-    public List<SkinPart> calculatePartsToRemove(List<SkinPart> groupParts, SkinPart partToAdd) {
+    public List<SkinPart> calculatePartsToRemove(List<SkinPart> allParts, SkinPart partToAdd) {
+        List<SkinPart> groupParts = allParts.stream().filter(x -> x.group == partToAdd.group).toList();
         List<SkinPart> partsToLeave = new ArrayList<>();
 
         // @todo refactor this logic

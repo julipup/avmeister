@@ -12,6 +12,8 @@ import org.bluk.avmeister.utils.StringHasher;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 public class CompleteSkin {
@@ -27,16 +29,21 @@ public class CompleteSkin {
         // Generating this skin's hash
         StringBuilder unhashedString = new StringBuilder();
 
-        parts.forEach(part -> {
-            unhashedString.append(part.texturePath);
-        });
+        parts.stream()
+                .sorted(new Comparator<SkinPart>() {
+                    @Override
+                    public int compare(SkinPart o1, SkinPart o2) {
+                        return o1.texturePath.compareTo(o2.texturePath);
+                    }
+                })
+                .forEach(part -> {
+                    unhashedString.append(part.texturePath);
+                });
 
         this.hash = StringHasher.hash(unhashedString.toString());
 
         // Checking if this skin is generated or no
         var cachedTexture = SkinCacher.getCachedTextures(this.hash);
-        Avmeister.instance.getLogger().info(String.format("New CompleteSkin entry with cachedTexture:", cachedTexture));
-
         if (cachedTexture != null) {
             this.texture = cachedTexture;
         }
@@ -57,17 +64,11 @@ public class CompleteSkin {
 
     public CompleteSkin recreateWithNewPart(SkinPart part) {
         var skinBuilder = new CompleteSkin.Builder();
-        var oldParts = this.parts;
+        var oldParts = new HashSet<SkinPart>(this.parts);
 
-        // Getting this part information
-        PartsGroup group = part.group;
+        skinBuilder.addPart(part);
 
-        if (group == null) {
-            // Just adding this part without any special logic
-            skinBuilder.addPart(part);
-        } else {
-            skinBuilder.addPart(part);
-
+        if (part.group != null) {
             // Checking if we need to remove any parts from our
             // oldParts array due to group rules
 
@@ -77,14 +78,12 @@ public class CompleteSkin {
             rules.add(new MaxPartsRule());
 
             rules.forEach(rule -> {
-                rule.calculatePartsToRemove(oldParts, part).forEach(oldParts::remove);
+                rule.calculatePartsToRemove(oldParts.stream().toList(), part).forEach(oldParts::remove);
             });
         }
 
         // Adding all other skin parts
-        oldParts.stream()
-                .filter(x -> !skinBuilder.parts.contains(x))
-                .forEach(skinBuilder::addPart);
+        oldParts.forEach(skinBuilder::addPart);
 
         return skinBuilder.build();
     }

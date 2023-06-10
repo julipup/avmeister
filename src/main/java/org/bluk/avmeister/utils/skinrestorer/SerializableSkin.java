@@ -1,10 +1,14 @@
 package org.bluk.avmeister.utils.skinrestorer;
 
+import org.bluk.avmeister.Avmeister;
 import org.bluk.avmeister.skins.CompleteSkin;
+import org.bluk.avmeister.skins.PartsStorage;
+import org.bluk.avmeister.skins.parts.SkinPart;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class SerializableSkin {
@@ -19,15 +23,26 @@ public class SerializableSkin {
                 .collect(Collectors.toList());
     }
 
-    public static CompleteSkin deserialize(HashMap<?, ?> values) {
-        // @todo throw normal errors
-        if (!values.containsKey("hash")) throw new RuntimeException("Invalid skin data to deserialize");
+    public static CompleteSkin deserialize(SerializableSkin serialized) {
+        // Getting all parts from storage
+        List<SkinPart> parts = new ArrayList<>();
 
-        String hash = (String) values.get("hash");
+        for (SerializableSkinPart serializedPart : serialized.parts) {
+            parts.add(PartsStorage.getById(serializedPart.id));
+        }
 
-        // @todo deserializing parts
-        // @todo Calculating parts hash
+        var skin = new CompleteSkin(parts);
 
-        return new CompleteSkin(new ArrayList<>());
+        // Checking hash
+        if (!Objects.equals(skin.hash, serialized.hash)) {
+            // @todo throw normal error
+            throw new RuntimeException(String.format("Invalid hash. Serialized: %s, computed: %s", serialized.hash, skin.hash));
+        }
+
+        return skin;
+    }
+
+    public String toString() {
+        return String.format("SerializableSkin { hash: %s, parts: [%s] }", hash, parts);
     }
 }

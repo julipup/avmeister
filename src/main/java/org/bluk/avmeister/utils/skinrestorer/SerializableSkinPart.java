@@ -11,4 +11,8 @@ public class SerializableSkinPart {
     public SerializableSkinPart(SkinPart part) {
         this.id = part.id;
     }
+
+    public String toString() {
+        return String.format("SerializableSkinPart { id: %s, hash: %s }", id, hash);
+    }
 }

@@ -1,5 +1,6 @@
 package org.bluk.avmeister.skins.parts;
 
+import org.bluk.avmeister.Avmeister;
 import org.bluk.avmeister.skins.groups.PartsGroup;
 
 import javax.annotation.Nullable;
@@ -11,6 +12,7 @@ public class SkinPart {
     @Nullable
     public final PartsGroup group;
     public final String texturePath;
+    public final String fullTexturePath;
 
     public SkinPart(String id, int x, int y, String texturePath, @Nullable PartsGroup group) {
         this.id = id;
@@ -18,6 +20,14 @@ public class SkinPart {
         this.y = y;
         this.texturePath = texturePath;
         this.group = group;
+
+        // FullTexturePath
+        String dataPath = Avmeister.instance.getDataFolder().toPath().toString();
+
+        if (texturePath.startsWith("/"))
+            fullTexturePath = dataPath + texturePath;
+        else
+            fullTexturePath = dataPath + "/" + texturePath;
     }
 
     //
@@ -62,5 +72,14 @@ public class SkinPart {
 
             return new SkinPart(id, x, y, texturePath, group);
         }
+    }
+
+    //
+    // Other
+    public String toString() {
+        return String.format(
+                "SkinPart { id: %s, group: %s, x: %s, y: %s, path: %s }",
+                this.id, this.group, this.x, this.y, this.texturePath
+        );
     }
 }

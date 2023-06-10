@@ -2,7 +2,6 @@ package org.bluk.avmeister.commands.parts;
 
 import com.jonahseguin.drink.annotation.Command;
 import com.jonahseguin.drink.annotation.Sender;
-import org.bluk.avmeister.Avmeister;
 import org.bluk.avmeister.abstracts.AbstractCommand;
 import org.bluk.avmeister.exceptions.parts.PartNotFoundException;
 import org.bluk.avmeister.managers.PlayerManager;
@@ -36,13 +35,13 @@ public class PartCommand extends AbstractCommand {
         // Getting target player's skin configuration
         var managedPlayer = PlayerManager.get(target);
 
-        var currentSkin = managedPlayer.getSkinUpdater().getSkin();
+        var currentSkin = managedPlayer.getSkinManager().getSkin();
 
         // Adding this part to this player's CompleteSkin
         var skinPart = PartsStorage.getById(partId);
         var newSkin = currentSkin.recreateWithNewPart(skinPart);
 
         // Generating and updating player's skin
-        managedPlayer.getSkinUpdater().setSkin(newSkin);
+        managedPlayer.getSkinManager().setSkin(newSkin);
     }
 }

@@ -1,10 +1,7 @@
 package org.bluk.avmeister.managers.playermanager;
 
 import lombok.Getter;
-import net.skinsrestorer.api.PlayerWrapper;
-import org.bluk.avmeister.Avmeister;
-import org.bluk.avmeister.managers.playermanager.actions.DataSaver;
-import org.bluk.avmeister.managers.playermanager.actions.SkinUpdater;
+import org.bluk.avmeister.managers.playermanager.actions.SkinManager;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -19,18 +16,14 @@ public class ManagedPlayer {
     //
     // ActionContainers
     @Getter
-    private final DataSaver dataSaver;
-
-    @Getter
-    private final SkinUpdater skinUpdater;
+    private final SkinManager skinManager;
 
     // Constructor
     public ManagedPlayer(Player player) {
         this.player = player;
 
         // Initializing player's action containers
-        this.dataSaver = new DataSaver(this);
-        this.skinUpdater = new SkinUpdater(this);
+        this.skinManager = new SkinManager(this);
 
         // Running AFTER_CREATE hook
         if (hooks.containsKey(HookType.AFTER_CREATE)) {

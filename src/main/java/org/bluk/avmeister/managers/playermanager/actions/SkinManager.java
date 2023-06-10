@@ -10,13 +10,13 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 
-public class SkinUpdater {
+public class SkinManager {
     private final ManagedPlayer managedPlayer;
     private final Player player;
     @Getter
     private CompleteSkin skin;
 
-    public SkinUpdater(ManagedPlayer managedPlayer) {
+    public SkinManager(ManagedPlayer managedPlayer) {
         this.managedPlayer = managedPlayer;
         this.player = managedPlayer.getPlayer();
         this.skin = new CompleteSkin(new ArrayList<>());
@@ -63,7 +63,4 @@ public class SkinUpdater {
     public void saveSkin() {
         SkinRestorer.saveToFile(player.getUniqueId(), this.skin);
     }
-
-    //
-    // Events
 }
